@@ -1,7 +1,7 @@
 ## Get Stuff
 ```lua
 local lib = {}
-local Theme = Color3.fromRGB(240, 240, 0)
+local Theme = Color3.fromRGB(232, 46, 46)
 local plr = game:GetService("Players").LocalPlayer
 
 function lib:CreateWindow(title)
@@ -35,6 +35,23 @@ function lib:CreateWindow(title)
 	Main.BorderSizePixel = 0
 	Main.Position = UDim2.new(0, 350, 0, 75)
 	Main.Size = UDim2.new(0, 542, 0, 384)
+	
+local UserInputService = game:GetService("UserInputService")
+
+local isVisible = true
+
+-- Function to handle Left CTRL key press
+local function onInputBegan(input, gameProcessedEvent)
+    if gameProcessedEvent then return end
+
+    if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.LeftControl then
+        isVisible = not isVisible
+        Main.Visible = isVisible
+    end
+end
+
+UserInputService.InputBegan:Connect(onInputBegan)
+
 
 	SideBar.Name = "SideBar"
 	SideBar.Parent = Main
@@ -230,7 +247,6 @@ function lib:CreateWindow(title)
 	function lib:CreateTab(title)
 		local Tab = {}
 
-		-- Create GUI elements
 		local TabButton = Instance.new("TextButton")
 		local TitleLabel = Instance.new("TextLabel")
 		local UICorner_4 = Instance.new("UICorner")
@@ -239,7 +255,6 @@ function lib:CreateWindow(title)
 		local Items = Instance.new("ScrollingFrame")
 		local UIListLayout_2 = Instance.new("UIListLayout")
 
-		-- Set up the TabButton
 		TabButton.Name = "Tab"
 		TabButton.Parent = Navigation
 		TabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -253,7 +268,6 @@ function lib:CreateWindow(title)
 		TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 		TabButton.TextSize = 14.000
 
-		-- Set up the TitleLabel
 		TitleLabel.Name = "Title"
 		TitleLabel.Parent = TabButton
 		TitleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -268,11 +282,9 @@ function lib:CreateWindow(title)
 		TitleLabel.TextTransparency = 0.600
 		TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-		-- Set up the corners
 		UICorner_4.CornerRadius = UDim.new(0, 6)
 		UICorner_4.Parent = TabButton
 
-		-- Set up the active line under the tab
 		ActiveLine.Name = "ActiveLine"
 		ActiveLine.Parent = TabButton
 		ActiveLine.BackgroundColor3 = Theme
@@ -283,7 +295,6 @@ function lib:CreateWindow(title)
 
 		UICorner_5.Parent = ActiveLine
 
-		-- Set up the content section for the tab
 		Items.Name = title
 		Items.Parent = Content
 		Items.Active = true
@@ -301,7 +312,6 @@ function lib:CreateWindow(title)
 		UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 		UIListLayout_2.Padding = UDim.new(0, 4)
 
-		-- Tab button functionality (click event to show content)
 		TabButton.MouseButton1Click:Connect(function()
 			for _, otherTab in pairs(Navigation:GetChildren()) do
 				if otherTab.Name == "Tab" then
@@ -317,7 +327,6 @@ function lib:CreateWindow(title)
 				end
 			end
 
-			-- Highlight the clicked tab and show its content
 			TabButton.BackgroundTransparency = 0.95
 			TitleLabel.TextTransparency = 0
 			ActiveLine.Size = UDim2.new(0, 4, 0, 19)
@@ -352,13 +361,11 @@ function lib:CreateWindow(title)
 	end
 	
 	function lib:CreateButton(title, TabParent, callback)
-		-- Create the button components
 		local Button = Instance.new("ImageButton")
 		local UICorner_14 = Instance.new("UICorner")
 		local Title_6 = Instance.new("TextLabel")
 		local MouseIcon = Instance.new("ImageLabel")
 
-		-- Set properties for the Button
 		Button.Name = "Button"
 		Button.Parent = TabParent
 		Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -369,10 +376,8 @@ function lib:CreateWindow(title)
 		Button.Size = UDim2.new(0, 366, 0, 37)
 		Button.AutoButtonColor = false
 
-		-- Apply UICorner
 		UICorner_14.Parent = Button
 
-		-- Set properties for the Title
 		Title_6.Name = "Title"
 		Title_6.Parent = Button
 		Title_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -388,7 +393,6 @@ function lib:CreateWindow(title)
 		Title_6.TextTransparency = 0.600
 		Title_6.TextXAlignment = Enum.TextXAlignment.Left
 
-		-- Set properties for the MouseIcon
 		MouseIcon.Name = "MouseIcon"
 		MouseIcon.Parent = Button
 		MouseIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -400,17 +404,15 @@ function lib:CreateWindow(title)
 		MouseIcon.Image = "rbxassetid://12804017021"
 		MouseIcon.ImageColor3 = Theme
 
-		-- Add a callback function when the button is clicked
 		Button.MouseButton1Click:Connect(function()
 			if callback then
-				callback()  -- Call the callback if it exists
+				callback()
 			end
 		end)
 	end
 	
 	local TweenService = game:GetService("TweenService")
 
-	-- Function to create the Toggle UI element
 	function lib:CreateToggle(title, TabParent, callback)
 		local Toggle = Instance.new("ImageButton")
 		local UICorner_8 = Instance.new("UICorner")
@@ -469,29 +471,24 @@ function lib:CreateWindow(title)
 		UICorner_10.CornerRadius = UDim.new(1, 0)
 		UICorner_10.Parent = Wheel
 
-		-- Toggle button functionality with Tween
 		Toggle.MouseButton1Click:Connect(function()
-			local isOn = Wheel.Position == UDim2.new(0, 0, -0.25, 0)  -- Check if the toggle is "off" state
+			local isOn = Wheel.Position == UDim2.new(0, 0, -0.25, 0)
 			if isOn then
-				-- If off, turn on (change position and color)
 				local tweenTitle = TweenService:Create(Title_4, TweenInfo.new(0.2), {TextTransparency = 0})
 				local tweenWheel = TweenService:Create(Wheel, TweenInfo.new(0.2), {Position = UDim2.new(0.512820542, 0, -0.25, 0), BackgroundColor3 = Theme})
 				tweenTitle:Play()
 				tweenWheel:Play()
 			else
-				-- If on, turn off (reset position and color)
 				local tweenTitle = TweenService:Create(Title_4, TweenInfo.new(0.2), {TextTransparency = 0.6})
 				local tweenWheel = TweenService:Create(Wheel, TweenInfo.new(0.2), {Position = UDim2.new(0, 0, -0.25, 0), BackgroundColor3 = Color3.fromRGB(51, 51, 51)})
 				tweenTitle:Play()
 				tweenWheel:Play()
 			end
-			-- Callback to pass the new state of the toggle
 			callback(not isOn)
 		end)
 	end
 	
 	function lib:CreateSlider(title, TabParent, min, max, callback)
-		-- Create the necessary UI components
 		local Slider = Instance.new("ImageButton")
 		local UICorner_15 = Instance.new("UICorner")
 		local Title_7 = Instance.new("TextLabel")
@@ -499,7 +496,6 @@ function lib:CreateWindow(title)
 		local Draggable = Instance.new("Frame")
 		local Value = Instance.new("TextLabel")
 
-		-- Set properties for the Slider
 		Slider.Name = "Slider"
 		Slider.Parent = TabParent
 		Slider.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -512,7 +508,6 @@ function lib:CreateWindow(title)
 
 		UICorner_15.Parent = Slider
 
-		-- Title label settings
 		Title_7.Name = "Title"
 		Title_7.Parent = Slider
 		Title_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -528,7 +523,6 @@ function lib:CreateWindow(title)
 		Title_7.TextTransparency = 0.600
 		Title_7.TextXAlignment = Enum.TextXAlignment.Left
 
-		-- Slider background settings
 		SliderBack.Name = "SliderBack"
 		SliderBack.Parent = Slider
 		SliderBack.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -537,7 +531,6 @@ function lib:CreateWindow(title)
 		SliderBack.Position = UDim2.new(0.0273224041, 0, 0.702127635, 0)
 		SliderBack.Size = UDim2.new(0, 345, 0, 2)
 
-		-- Draggable slider settings
 		Draggable.Name = "Draggable"
 		Draggable.Parent = SliderBack
 		Draggable.BackgroundColor3 = Theme
@@ -545,7 +538,6 @@ function lib:CreateWindow(title)
 		Draggable.BorderSizePixel = 0
 		Draggable.Size = UDim2.new(0, 257, 0, 2)
 
-		-- Value label settings
 		Value.Name = "Value"
 		Value.Parent = Slider
 		Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -562,7 +554,6 @@ function lib:CreateWindow(title)
 		Value.TextWrapped = true
 		Value.TextXAlignment = Enum.TextXAlignment.Right
 
-		-- Slider logic
 		local currentValue = min
 		local isDragging = false
 		local touchID = nil
@@ -630,7 +621,6 @@ function lib:CreateWindow(title)
 			end
 		end
 
-		-- Connect event handlers
 		Slider.MouseButton1Down:Connect(StartDragging)
 		UIS.InputChanged:Connect(UpdateDragging)
 		UIS.InputEnded:Connect(StopDragging)
@@ -639,14 +629,12 @@ function lib:CreateWindow(title)
 	end
 	
 	function lib:CreateInput(title, TabParent, callback)
-		-- Create the UI components
 		local Textbox = Instance.new("ImageButton")
 		local UICorner_16 = Instance.new("UICorner")
 		local Title_8 = Instance.new("TextLabel")
 		local Input = Instance.new("TextBox")
 		local UICorner_17 = Instance.new("UICorner")
 
-		-- Set properties for Textbox
 		Textbox.Name = "Textbox"
 		Textbox.Parent = TabParent
 		Textbox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -657,10 +645,8 @@ function lib:CreateWindow(title)
 		Textbox.Size = UDim2.new(0, 366, 0, 37)
 		Textbox.AutoButtonColor = false
 
-		-- Add a corner radius for the Textbox
 		UICorner_16.Parent = Textbox
 
-		-- Set properties for Title Label
 		Title_8.Name = "Title"
 		Title_8.Parent = Textbox
 		Title_8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -676,7 +662,6 @@ function lib:CreateWindow(title)
 		Title_8.TextTransparency = 0.600
 		Title_8.TextXAlignment = Enum.TextXAlignment.Left
 
-		-- Set properties for Input TextBox
 		Input.Name = "Input"
 		Input.Parent = Textbox
 		Input.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -690,13 +675,10 @@ function lib:CreateWindow(title)
 		Input.TextSize = 14.000
 		Input.TextTransparency = 0.600
 
-		-- Add a corner radius for the Input TextBox
 		UICorner_17.CornerRadius = UDim.new(0, 6)
 		UICorner_17.Parent = Input
 
-		-- Set up the callback for when the user inputs text
 		Input.FocusLost:Connect(function(enteredText)
-			-- If the callback function is provided, call it with the input text
 			if callback then
 				callback(enteredText)
 			end
