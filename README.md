@@ -696,9 +696,10 @@ lib:CreateWindow("Saturn")
 ```lua
 local MagnetTab, MagnetTab = lib:CreateTab("Magnets")
 ```
-## Create Section
+## Create Section or make it a line
 ```lua
 lib:CreateSection("Magnets", MagnetTab)
+lib:CreateSection("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", MagnetTab)
 ```
 ## Create Button
 ```lua
