@@ -21,9 +21,9 @@ function lib:CreateWindow(title)
 	local IdkBar = Instance.new("Frame")
 	local Line_2 = Instance.new("Frame")
 	local Content = Instance.new("Frame")
-	
+
 	UI.Name = "UI"
-	UI.Parent = game:GetService("Players").LocalPlayer.PlayerGui or game:GetService("CoreGui")
+	UI.Parent = game:GetService("CoreGui")
 	UI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	UI.DisplayOrder = 99
 	UI.ResetOnSpawn = false
@@ -35,22 +35,22 @@ function lib:CreateWindow(title)
 	Main.BorderSizePixel = 0
 	Main.Position = UDim2.new(0, 350, 0, 75)
 	Main.Size = UDim2.new(0, 542, 0, 384)
-	
-local UserInputService = game:GetService("UserInputService")
 
-local isVisible = true
+	local UserInputService = game:GetService("UserInputService")
 
--- Function to handle Left CTRL key press
-local function onInputBegan(input, gameProcessedEvent)
-    if gameProcessedEvent then return end
+	local isVisible = true
 
-    if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.LeftControl then
-        isVisible = not isVisible
-        Main.Visible = isVisible
-    end
-end
+	-- Function to handle Left CTRL key press
+	local function onInputBegan(input, gameProcessedEvent)
+		if gameProcessedEvent then return end
 
-UserInputService.InputBegan:Connect(onInputBegan)
+		if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.LeftControl then
+			isVisible = not isVisible
+			Main.Visible = isVisible
+		end
+	end
+
+	UserInputService.InputBegan:Connect(onInputBegan)
 
 
 	SideBar.Name = "SideBar"
@@ -75,7 +75,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 	Title.TextSize = 16.000
 	Title.TextTransparency = 0
 	Title.TextXAlignment = Enum.TextXAlignment.Left
-	
+
 	local currentMonth = os.date("*t").month
 
 	if currentMonth == 12 then
@@ -107,7 +107,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout.Padding = UDim.new(0, 4)
-	
+
 	Line.Name = "Line"
 	Line.Parent = Main
 	Line.BackgroundColor3 = Color3.fromRGB(51, 51, 51)
@@ -185,7 +185,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 	Content.BorderSizePixel = 0
 	Content.Position = UDim2.new(0.28597787, 0, 0.145833328, 0)
 	Content.Size = UDim2.new(0, 386, 0, 306)
-	
+
 	local function FXWHN_script() -- Main.dragWindow 
 		local script = Instance.new('LocalScript', Main)
 
@@ -243,7 +243,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 
 	end
 	coroutine.wrap(FXWHN_script)()
-	
+
 	function lib:CreateTab(title)
 		local Tab = {}
 
@@ -339,12 +339,12 @@ UserInputService.InputBegan:Connect(onInputBegan)
 		end)
 
 		return TabButton, Items
-		
+
 	end
-	
+
 	function lib:CreateSection(title, TabParent)
 		local Section = Instance.new("TextLabel")
-		
+
 		Section.Name = "Section"
 		Section.Parent = TabParent
 		Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -359,7 +359,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 		Section.TextTransparency = 0.600
 		Section.TextXAlignment = Enum.TextXAlignment.Left
 	end
-	
+
 	function lib:CreateButton(title, TabParent, callback)
 		local Button = Instance.new("ImageButton")
 		local UICorner_14 = Instance.new("UICorner")
@@ -410,7 +410,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 			end
 		end)
 	end
-	
+
 	local TweenService = game:GetService("TweenService")
 
 	function lib:CreateToggle(title, TabParent, callback)
@@ -487,7 +487,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 			callback(not isOn)
 		end)
 	end
-	
+
 	function lib:CreateSlider(title, TabParent, min, max, callback)
 		local Slider = Instance.new("ImageButton")
 		local UICorner_15 = Instance.new("UICorner")
@@ -520,7 +520,7 @@ UserInputService.InputBegan:Connect(onInputBegan)
 		Title_7.Text = title
 		Title_7.TextColor3 = Color3.fromRGB(255, 255, 255)
 		Title_7.TextSize = 17.000
-		Title_7.TextTransparency = 0.600
+		Title_7.TextTransparency = 0
 		Title_7.TextXAlignment = Enum.TextXAlignment.Left
 
 		SliderBack.Name = "SliderBack"
@@ -547,44 +547,23 @@ UserInputService.InputBegan:Connect(onInputBegan)
 		Value.Position = UDim2.new(0.800546467, 0, -0.0195520278, 0)
 		Value.Size = UDim2.new(0, 48, 0, 28)
 		Value.Font = Enum.Font.SourceSans
-		Value.Text = "0.1"
+		Value.Text = "0"
 		Value.TextColor3 = Color3.fromRGB(255, 255, 255)
 		Value.TextSize = 16.000
-		Value.TextTransparency = 0.600
+		Value.TextTransparency = 0
 		Value.TextWrapped = true
 		Value.TextXAlignment = Enum.TextXAlignment.Right
 
+		local UIS = game:GetService("UserInputService")
 		local currentValue = min
 		local isDragging = false
 		local touchID = nil
-		local UIS = game:GetService("UserInputService")
-		local TweenService = game:GetService("TweenService")
-		local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
-
-		local function UpdateTransparency()
-			if isDragging then
-				local tweenTitle = TweenService:Create(Title_7, tweenInfo, {TextTransparency = 0})
-				tweenTitle:Play()
-				local tweenValue = TweenService:Create(Value, tweenInfo, {TextTransparency = 0})
-				tweenValue:Play()
-				local tweenDraggable = TweenService:Create(Draggable, tweenInfo, {BackgroundTransparency = 0})
-				tweenDraggable:Play()
-			else
-				local tweenTitle = TweenService:Create(Title_7, tweenInfo, {TextTransparency = 0.6})
-				tweenTitle:Play()
-				local tweenValue = TweenService:Create(Value, tweenInfo, {TextTransparency = 0.6})
-				tweenValue:Play()
-				local tweenDraggable = TweenService:Create(Draggable, tweenInfo, {BackgroundTransparency = 0.6})
-				tweenDraggable:Play()
-			end
-		end
 
 		local function UpdateSliderPosition()
 			local percentage = math.clamp((currentValue - min) / (max - min), 0, 1)
 			Value.Text = string.format("%.1f", currentValue)
 			Draggable.Size = UDim2.new(percentage, 0, 1, 0)
 			callback(currentValue)
-			UpdateTransparency()
 		end
 
 		local function StartDragging(input)
@@ -592,7 +571,6 @@ UserInputService.InputBegan:Connect(onInputBegan)
 			if input.UserInputType == Enum.UserInputType.Touch then
 				touchID = input.UserInputIndex
 			end
-			UpdateTransparency()
 		end
 
 		local function UpdateDragging(input)
@@ -617,17 +595,16 @@ UserInputService.InputBegan:Connect(onInputBegan)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				isDragging = false
 				touchID = nil
-				UpdateTransparency()
 			end
 		end
 
 		Slider.MouseButton1Down:Connect(StartDragging)
 		UIS.InputChanged:Connect(UpdateDragging)
 		UIS.InputEnded:Connect(StopDragging)
-
 		UpdateSliderPosition()
 	end
-	
+
+
 	function lib:CreateInput(title, TabParent, callback)
 		local Textbox = Instance.new("ImageButton")
 		local UICorner_16 = Instance.new("UICorner")
@@ -694,34 +671,30 @@ lib:CreateWindow("Saturn")
 ```
 ## Create Tab
 ```lua
-local MagnetTab, MagnetTab = lib:CreateTab("Magnets")
-```
-## Create Section or make it a line
-```lua
-lib:CreateSection("Magnets", MagnetTab)
-lib:CreateSection("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", MagnetTab)
+local tab1, tab1 = lib:CreateTab("Magnets")
+local tab2, tab2 = lib:CreateTab("Player")
 ```
 ## Create Button
 ```lua
-lib:CreateButton("Who made the ui?", MagnetTab, function()
+lib:CreateButton("Who made the ui?", tab1, function()
 	print("JUSTVPN")
 end)
 ```
 ## Create Toggle
 ```lua
-lib:CreateToggle("Show Hitbox", MagnetTab, function(state)
+lib:CreateToggle("Show Hitbox", tab1, function(state)
 	print("Magnet toggle state:", state)
 end)
 ```
 ## Create Slider
 ```lua
-lib:CreateSlider("Brute Tween Delay", MagnetTab, 0, 1, function(value)
+lib:CreateSlider("Magnet Delay", tab1, 0, 1, function(value)
 	print("Current Value: " .. value)
 end)
 ```
 ## Create Input
 ```lua
-lib:CreateInput("Enter your name", MagnetTab, function(inputText)
+lib:CreateInput("Enter your name", tab1, function(inputText)
 	print("User entered:", inputText)
 end)
 ```
