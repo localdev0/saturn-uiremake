@@ -218,7 +218,7 @@ function lib:NewWindow(title)
 		Tab.Font = Enum.Font.Gotham
 		Tab.Text = title
 		Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Tab.TextSize = 19.000
+		Tab.TextSize = 16.000
 		Tab.TextTransparency = 0.400
 
 		UICorner_3.CornerRadius = UDim.new(0, 6)
