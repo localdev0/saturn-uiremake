@@ -31,7 +31,7 @@ function lib:NewWindow(title)
 	Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Main.BorderSizePixel = 0
-	Main.Position = UDim2.new(0, 103, 0, 76)
+	Main.Position = UDim2.new(0, 425, 0, 150)
 	Main.Size = UDim2.new(0, 622, 0, 369)
 
 	UIGradient.Color = ThemeUI
