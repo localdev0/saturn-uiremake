@@ -1,7 +1,7 @@
 ## Get Stuff
 ```lua
 local lib = {}
-local ThemeUI = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(49, 60, 149)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(83, 113, 241))}
+local ThemeUI = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(161, 36, 182)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(83, 113, 241))}
 
 function lib:NewWindow(title)
 	local UI = Instance.new("ScreenGui")
