@@ -280,7 +280,7 @@ function lib:NewWindow(title)
 			end
 		end)
 
-		return Tab, Items
+		return Items
 	end
 
 	
@@ -991,8 +991,8 @@ lib:NewWindow("SHADOW")
 ```
 ## Create Tab
 ```lua
-local tab1, tab1 = lib:NewTab("Test")
-local tab2, tab2 = lib:NewTab("ing")
+local tab1 = lib:NewTab("Test")
+local tab2 = lib:NewTab("ing")
 ```
 ## Create Button
 ```lua
