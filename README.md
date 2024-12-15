@@ -994,10 +994,6 @@ lib:NewWindow("SHADOW")
 local tab1, tab1 = lib:NewTab("Test")
 local tab2, tab2 = lib:NewTab("ing")
 ```
-## Create Section
-```lua
-lib:NewSection("Test", tab1)
-```
 ## Create Button
 ```lua
 lib:NewButton("Click Me!", tab1, "Copies the discord server to your clipboard", function()
