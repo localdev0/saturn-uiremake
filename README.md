@@ -806,7 +806,7 @@ function lib:NewWindow(title)
 		UIListLayout_4.Parent = DropHolder
 		UIListLayout_4.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_4.Padding = UDim.new(0, 1)
+		UIListLayout_4.Padding = UDim.new(0, 0)
 		
 		ToolTip.Name = "Tooptip"
 		ToolTip.Parent = TabParent
