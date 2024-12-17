@@ -408,165 +408,152 @@ function lib:NewWindow(title)
 
 	
 	local TweenService = game:GetService("TweenService")
-	local UserInputService = game:GetService("UserInputService")
+local UserInputService = game:GetService("UserInputService")
 
-	function lib:NewToggle(title, TabParent, toolTipText, callback)
-		local Toggle = Instance.new("ImageButton")
-		local UICorner_8 = Instance.new("UICorner")
-		local Title_3 = Instance.new("TextLabel")
-		local Checkbox_2 = Instance.new("Frame")
-		local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
-		local UICorner_9 = Instance.new("UICorner")
-		local Checkmark_2 = Instance.new("ImageLabel")
-		local UICorner_10 = Instance.new("UICorner")
-		local KeybindToggleBox_2 = Instance.new("TextBox")
-		local ToolTip = Instance.new("Frame")
-		local UICorner_21 = Instance.new("UICorner")
-		local ToolTitle = Instance.new("TextLabel")
-		local UIStroke_2 = Instance.new("UIStroke")
+function NewToggle(title, tabParent, toolTipText, callback)
+    local Toggle = Instance.new("ImageButton")
+    local UICorner_8 = Instance.new("UICorner")
+    local Title_3 = Instance.new("TextLabel")
+    local Checkbox_2 = Instance.new("Frame")
+    local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+    local UICorner_9 = Instance.new("UICorner")
+    local Checkmark_2 = Instance.new("ImageLabel")
+    local UICorner_10 = Instance.new("UICorner")
+    local KeybindToggleBox_2 = Instance.new("TextBox")
+    local ToolTip = Instance.new("Frame")
+    local UICorner_21 = Instance.new("UICorner")
+    local ToolTitle = Instance.new("TextLabel")
+    local UIStroke_2 = Instance.new("UIStroke")
 
-		Toggle.Name = "Toggle"
-		Toggle.Parent = TabParent
-		Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		Toggle.BackgroundTransparency = 0.5
-		Toggle.BorderSizePixel = 0
-		Toggle.Size = UDim2.new(0, 472, 0, 38)
-		Toggle.AutoButtonColor = false
+    -- Toggle setup
+    Toggle.Name = "Toggle"
+    Toggle.Parent = tabParent
+    Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Toggle.BackgroundTransparency = 0.5
+    Toggle.BorderSizePixel = 0
+    Toggle.Size = UDim2.new(0, 472, 0, 38)
+    Toggle.AutoButtonColor = false
+    UICorner_8.CornerRadius = UDim.new(0, 6)
+    UICorner_8.Parent = Toggle
 
-		UICorner_8.CornerRadius = UDim.new(0, 6)
-		UICorner_8.Parent = Toggle
+    -- Title
+    Title_3.Name = "Title"
+    Title_3.Parent = Toggle
+    Title_3.BackgroundTransparency = 1
+    Title_3.Position = UDim2.new(0.025, 0, 0, 0)
+    Title_3.Size = UDim2.new(0, 234, 0, 38)
+    Title_3.Font = Enum.Font.Gotham
+    Title_3.Text = title
+    Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title_3.TextSize = 18
+    Title_3.TextXAlignment = Enum.TextXAlignment.Left
 
-		Title_3.Name = "Title"
-		Title_3.Parent = Toggle
-		Title_3.BackgroundTransparency = 1
-		Title_3.Position = UDim2.new(0.025, 0, 0, 0)
-		Title_3.Size = UDim2.new(0, 234, 0, 38)
-		Title_3.Font = Enum.Font.Gotham
-		Title_3.Text = title
-		Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_3.TextSize = 18
-		Title_3.TextXAlignment = Enum.TextXAlignment.Left
+    -- Checkbox
+    Checkbox_2.Name = "Checkbox"
+    Checkbox_2.Parent = Toggle
+    Checkbox_2.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    Checkbox_2.Position = UDim2.new(0.918, 0, 0.122, 0)
+    Checkbox_2.Size = UDim2.new(0, 32, 0, 29)
+    UICorner_9.CornerRadius = UDim.new(0, 4)
+    UICorner_9.Parent = Checkbox_2
+    UIAspectRatioConstraint_2.Parent = Checkbox_2
+    UIAspectRatioConstraint_2.AspectRatio = 1.13
 
-		Checkbox_2.Name = "Checkbox"
-		Checkbox_2.Parent = Toggle
-		Checkbox_2.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-		Checkbox_2.Position = UDim2.new(0.918, 0, 0.122, 0)
-		Checkbox_2.Size = UDim2.new(0, 32, 0, 29)
+    -- Checkmark
+    Checkmark_2.Name = "Checkmark"
+    Checkmark_2.Parent = Checkbox_2
+    Checkmark_2.BackgroundTransparency = 1
+    Checkmark_2.Size = UDim2.new(0, 25, 0, 22)
+    Checkmark_2.Image = "rbxassetid://10709790644"
+    Checkmark_2.ImageTransparency = 1
+    Checkmark_2.Position = UDim2.new(0.09375, 0, 0.118791193, 0)
 
-		UIAspectRatioConstraint_2.Parent = Checkbox_2
-		UIAspectRatioConstraint_2.AspectRatio = 1.13
+    -- Keybind TextBox
+    KeybindToggleBox_2.Name = "KeybindToggleBox"
+    KeybindToggleBox_2.Parent = Toggle
+    KeybindToggleBox_2.BackgroundTransparency = 1
+    KeybindToggleBox_2.Position = UDim2.new(0.739, 0, 0, 0)
+    KeybindToggleBox_2.Size = UDim2.new(0, 78, 0, 38)
+    KeybindToggleBox_2.Font = Enum.Font.SourceSans
+    KeybindToggleBox_2.PlaceholderText = "Click To Bind"
+    KeybindToggleBox_2.Text = ""
+    KeybindToggleBox_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+    KeybindToggleBox_2.TextSize = 17
+    KeybindToggleBox_2.TextXAlignment = Enum.TextXAlignment.Left
 
-		UICorner_9.CornerRadius = UDim.new(0, 4)
-		UICorner_9.Parent = Checkbox_2
+    -- Tooltip
+    ToolTip.Name = "Tooltip"
+    ToolTip.Parent = tabParent
+    ToolTip.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    ToolTip.BackgroundTransparency = 0.3
+    ToolTip.Position = UDim2.new(0.008, 0, -0.089, 0)
+    ToolTip.Size = UDim2.new(0, 420, 0, 34)
+    ToolTip.Visible = false
+    UICorner_21.CornerRadius = UDim.new(0, 4)
+    UICorner_21.Parent = ToolTip
 
-		Checkmark_2.Name = "Checkmark"
-		Checkmark_2.Parent = Checkbox_2
-		Checkmark_2.BackgroundTransparency = 1
-		Checkmark_2.Size = UDim2.new(0, 25, 0, 22)
-		Checkmark_2.Image = "rbxassetid://10709790644"
-		Checkmark_2.ImageTransparency = 1
-		Checkmark_2.Position = UDim2.new(0.09375, 0, 0.118791193, 0)
+    ToolTitle.Name = "ToolTitle"
+    ToolTitle.Parent = ToolTip
+    ToolTitle.BackgroundTransparency = 1
+    ToolTitle.Position = UDim2.new(0.042, 0, 0, 0)
+    ToolTitle.Size = UDim2.new(0, 226, 0, 34)
+    ToolTitle.Font = Enum.Font.SourceSans
+    ToolTitle.Text = toolTipText
+    ToolTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+    ToolTitle.TextSize = 18
 
-		UICorner_10.CornerRadius = UDim.new(0, 4)
-		UICorner_10.Parent = Checkmark_2
+    -- Tooltip Tweens
+    local tooltipTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local tooltipShowTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Transparency = 0.3})
+    local tooltipHideTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Transparency = 1})
 
-		KeybindToggleBox_2.Name = "KeybindToggleBox"
-		KeybindToggleBox_2.Parent = Toggle
-		KeybindToggleBox_2.BackgroundTransparency = 1
-		KeybindToggleBox_2.Position = UDim2.new(0.739, 0, 0, 0)
-		KeybindToggleBox_2.Size = UDim2.new(0, 78, 0, 38)
-		KeybindToggleBox_2.Font = Enum.Font.SourceSans
-		KeybindToggleBox_2.PlaceholderText = "Click To Bind"
-		KeybindToggleBox_2.Text = ""
-		KeybindToggleBox_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-		KeybindToggleBox_2.TextSize = 17
-		KeybindToggleBox_2.TextXAlignment = Enum.TextXAlignment.Left
-		
-		ToolTip.Name = "Tooptip"
-		ToolTip.Parent = TabParent
-		ToolTip.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderSizePixel = 0
-		ToolTip.BackgroundTransparency = 0.3
-		ToolTip.Position = UDim2.new(0.00833333377, 0, -0.0893554688, 0)
-		ToolTip.Size = UDim2.new(0, 420, 0, 34)
-		ToolTip.Visible = false
+    Toggle.MouseEnter:Connect(function()
+        ToolTip.Visible = true
+        tooltipShowTween:Play()
+    end)
 
-		UICorner_21.CornerRadius = UDim.new(0, 4)
-		UICorner_21.Parent = ToolTip
+    Toggle.MouseLeave:Connect(function()
+        tooltipHideTween:Play()
+        tooltipHideTween.Completed:Wait()
+        ToolTip.Visible = false
+    end)
 
-		ToolTitle.Name = "ToolTitle"
-		ToolTitle.Parent = ToolTip
-		ToolTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.BackgroundTransparency = 1.000
-		ToolTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTitle.BorderSizePixel = 0
-		ToolTitle.Position = UDim2.new(0.0423728824, 0, -0.028801702, 0)
-		ToolTitle.Size = UDim2.new(0, 226, 0, 34)
-		ToolTitle.Font = Enum.Font.SourceSans
-		ToolTitle.Text = toolTipText
-		ToolTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.TextSize = 18.000
-		ToolTitle.TextXAlignment = Enum.TextXAlignment.Left
+    -- Toggle State Logic
+    local toggleState = false
+    local boundKey
 
-		local tooltipTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-		local tooltipVisibleTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 34), Transparency = 0.5})
-		local tooltipHiddenTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 0), Transparency = 1})
+    local function updateToggle(state)
+        local targetTransparency = state and 0 or 1
+        TweenService:Create(Checkmark_2, TweenInfo.new(0.2), {ImageTransparency = targetTransparency}):Play()
+        if callback then
+            callback(state)
+        end
+    end
 
-		Toggle.MouseEnter:Connect(function()
-			ToolTip.Visible = true
-			tooltipVisibleTween:Play()
-		end)
+    Toggle.MouseButton1Click:Connect(function()
+        toggleState = not toggleState
+        updateToggle(toggleState)
+    end)
 
-		Toggle.MouseLeave:Connect(function()
-			tooltipHiddenTween:Play()
-			tooltipHiddenTween.Completed:Connect(function()
-				ToolTip.Visible = false
-			end)
-		end)
+    KeybindToggleBox_2.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            local inputText = KeybindToggleBox_2.Text:upper()
+            if #inputText == 1 and inputText:match("%a") then
+                boundKey = inputText
+                KeybindToggleBox_2.Text = "Bind: " .. boundKey
+            else
+                KeybindToggleBox_2.Text = ""
+            end
+        end
+    end)
 
-		Toggle.MouseButton1Click:Connect(function()
-			if callback then
-				callback()
-			end
-		end)
-
-		local toggleState = false
-		local boundKey = nil
-
-		local function updateToggle(state)
-			local newTransparency = state and 0 or 1
-			local tween = TweenService:Create(Checkmark_2, TweenInfo.new(0.2), {ImageTransparency = newTransparency})
-			tween:Play()
-			if callback then
-				callback(state)
-			end
-		end
-
-		Toggle.MouseButton1Click:Connect(function()
-			toggleState = not toggleState
-			updateToggle(toggleState)
-		end)
-
-		KeybindToggleBox_2.FocusLost:Connect(function(enterPressed)
-			if enterPressed then
-				local text = KeybindToggleBox_2.Text:upper()
-				if #text == 1 and text:match("%a") then
-					boundKey = text
-					KeybindToggleBox_2.Text = "Bind: " .. boundKey
-				else
-					KeybindToggleBox_2.Text = ""
-				end
-			end
-		end)
-
-		UserInputService.InputBegan:Connect(function(input, isProcessed)
-			if not isProcessed and boundKey and input.KeyCode.Name == boundKey then
-				toggleState = not toggleState
-				updateToggle(toggleState)
-			end
-		end)
-	end
+    UserInputService.InputBegan:Connect(function(input, isProcessed)
+        if not isProcessed and input.KeyCode.Name == boundKey then
+            toggleState = not toggleState
+            updateToggle(toggleState)
+        end
+    end)
+end
 	
 	local UserInputService = game:GetService("UserInputService")
 
