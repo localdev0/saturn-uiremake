@@ -405,8 +405,6 @@ function lib:NewWindow(title)
 		return Button
 	end
 
-
-	
 	local TweenService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
 	
@@ -497,19 +495,20 @@ function lib:NewWindow(title)
 	    ToolTitle.TextSize = 18
 	
 	    local tooltipTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-	    local tooltipShowTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Transparency = 0.3})
-	    local tooltipHideTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Transparency = 1})
+		local tooltipVisibleTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 34), Transparency = 0.5})
+		local tooltipHiddenTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 0), Transparency = 1})
 	
 	    Toggle.MouseEnter:Connect(function()
-	        ToolTip.Visible = true
-	        tooltipShowTween:Play()
-	    end)
-	
-	    Toggle.MouseLeave:Connect(function()
-	        tooltipHideTween:Play()
-	        tooltipHideTween.Completed:Wait()
-	        ToolTip.Visible = false
-	    end)
+			ToolTip.Visible = true
+			tooltipVisibleTween:Play()
+		end)
+
+		Toggle.MouseLeave:Connect(function()
+			tooltipHiddenTween:Play()
+			tooltipHiddenTween.Completed:Connect(function()
+				ToolTip.Visible = false
+			end)
+		end)
 	
 	    local toggleState = false
 	    local boundKey
