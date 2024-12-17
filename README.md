@@ -338,7 +338,7 @@ function lib:NewWindow(title)
 		Title_8.Font = Enum.Font.Gotham
 		Title_8.Text = title
 		Title_8.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_8.TextSize = 18.000
+		Title_8.TextSize = 15.000
 		Title_8.TextXAlignment = Enum.TextXAlignment.Left
 
 		MouseIcon.Name = "MouseIcon"
@@ -441,7 +441,7 @@ function lib:NewWindow(title)
 	    Title_3.Font = Enum.Font.Gotham
 	    Title_3.Text = title
 	    Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-	    Title_3.TextSize = 18
+	    Title_3.TextSize = 15
 	    Title_3.TextXAlignment = Enum.TextXAlignment.Left
 	
 	    Checkbox_2.Name = "Checkbox"
@@ -586,7 +586,7 @@ function lib:NewWindow(title)
 		Title_4.Font = Enum.Font.Gotham
 		Title_4.Text = title
 		Title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_4.TextSize = 18.000
+		Title_4.TextSize = 15.000
 		Title_4.TextXAlignment = Enum.TextXAlignment.Left
 
 		SliderBack.Name = "SliderBack"
@@ -622,7 +622,7 @@ function lib:NewWindow(title)
 		Value.Font = Enum.Font.Gotham
 		Value.Text = tostring(default)
 		Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Value.TextSize = 18.000
+		Value.TextSize = 15.000
 		Value.TextXAlignment = Enum.TextXAlignment.Right
 		
 		ToolTip.Name = "Tooptip"
@@ -761,7 +761,7 @@ function lib:NewWindow(title)
 		Title_5.Font = Enum.Font.Gotham
 		Title_5.Text = title
 		Title_5.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_5.TextSize = 18.000
+		Title_5.TextSize = 15.000
 		Title_5.TextXAlignment = Enum.TextXAlignment.Left
 
 		Checkbox_3.Name = "Checkbox"
@@ -785,7 +785,7 @@ function lib:NewWindow(title)
 		SelectedText.Font = Enum.Font.Gotham
 		SelectedText.Text = "Select an option"
 		SelectedText.TextColor3 = Color3.fromRGB(255, 255, 255)
-		SelectedText.TextSize = 18.000
+		SelectedText.TextSize = 15.000
 
 		local DropHolder = Instance.new("Frame")
 		local UIPadding_4 = Instance.new("UIPadding")
@@ -926,7 +926,7 @@ function lib:NewWindow(title)
 		Title_6.Font = Enum.Font.Gotham
 		Title_6.Text = title
 		Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_6.TextSize = 18.000
+		Title_6.TextSize = 15.000
 		Title_6.TextXAlignment = Enum.TextXAlignment.Left
 
 		Checkbox_4.Name = "Checkbox"
