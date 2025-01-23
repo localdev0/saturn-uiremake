@@ -1,7 +1,7 @@
 ## Get Stuff
 ```lua
 local lib = {}
-local ThemeUI = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(3, 6, 30)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(8, 26, 91))}
+local ThemeUI = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(49, 60, 149)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(83, 113, 241))}
 
 function lib:NewWindow(title)
 	local UI = Instance.new("ScreenGui")
@@ -31,7 +31,7 @@ function lib:NewWindow(title)
 	Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Main.BorderSizePixel = 0
-	Main.Position = UDim2.new(0, 425, 0, 150)
+	Main.Position = UDim2.new(0, 103, 0, 76)
 	Main.Size = UDim2.new(0, 622, 0, 369)
 
 	UIGradient.Color = ThemeUI
@@ -140,7 +140,7 @@ function lib:NewWindow(title)
 		local dragStart
 		local startPos
 
-		local tweenInfo = TweenInfo.new(0.08, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+		local tweenInfo = TweenInfo.new(0.16, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
 
 		local function update(input)
 			local delta = input.Position - dragStart
@@ -196,8 +196,6 @@ function lib:NewWindow(title)
 	end
 	coroutine.wrap(RUUUW_script)()
 	
-	local TweenService = game:GetService("TweenService")
-
 	function lib:NewTab(title)
 		local Tab = Instance.new("TextButton")
 		local UICorner_3 = Instance.new("UICorner")
@@ -218,7 +216,7 @@ function lib:NewWindow(title)
 		Tab.Font = Enum.Font.Gotham
 		Tab.Text = title
 		Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Tab.TextSize = 16.000
+		Tab.TextSize = 19.000
 		Tab.TextTransparency = 0.400
 
 		UICorner_3.CornerRadius = UDim.new(0, 6)
@@ -240,11 +238,11 @@ function lib:NewWindow(title)
 		Items.BackgroundTransparency = 1.000
 		Items.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Items.BorderSizePixel = 0
-		Items.Size = UDim2.new(0, 0, 0, 319)  -- Initial size set to (0, 0)
+		Items.Size = UDim2.new(0, 487, 0, 319)
 		Items.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
 		Items.CanvasSize = UDim2.new(0, 0, 15, 0)
 		Items.ScrollBarThickness = 0
-		Items.Visible = false  -- Start with visibility off
+		Items.Visible = false
 
 		UIPadding_2.Parent = Items
 		UIPadding_2.PaddingTop = UDim.new(0, 4)
@@ -261,19 +259,14 @@ function lib:NewWindow(title)
 					local otherItems = Content:FindFirstChild(otherTab.Text)
 
 					if otherTab == Tab then
-						TweenService:Create(Tab, TweenInfo.new(0.3), {BackgroundTransparency = 0.5}):Play()
-						TweenService:Create(ActiveLine_2, TweenInfo.new(0.3), {BackgroundTransparency = 0}):Play()
+						Tab.BackgroundTransparency = 0.5
+						ActiveLine_2.BackgroundTransparency = 0
 
 						Items.Visible = true
-						local fadeInTween = TweenService:Create(Items, TweenInfo.new(0.6), {BackgroundTransparency = 1, Size = UDim2.new(0, 487, 0, 319)})
-						fadeInTween:Play()
-
 					else
-						TweenService:Create(otherTab, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-						TweenService:Create(otherLine, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-
-						local fadeOutTween = TweenService:Create(otherItems, TweenInfo.new(0.6), {BackgroundTransparency = 1, Size = UDim2.new(0, 0, 0, 319)})
-						fadeOutTween:Play()
+						otherTab.BackgroundTransparency = 1
+						otherLine.BackgroundTransparency = 1
+						
 						otherItems.Visible = false
 					end
 				end
@@ -283,36 +276,12 @@ function lib:NewWindow(title)
 		return Items
 	end
 
-	
-	function lib:NewSection(title, TabParent)
-		local Section = Instance.new("Frame")
-		local UICorner_4 = Instance.new("UICorner")
-		
-		Section.Name = title
-		Section.Parent = TabParent
-		Section.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		Section.BackgroundTransparency = 0.500
-		Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Section.BorderSizePixel = 0
-		Section.Position = UDim2.new(0.397330582, 0, 0.650793672, 0)
-		Section.Size = UDim2.new(0, 399, 0, 3)
-
-		UICorner_4.CornerRadius = UDim.new(1, 0)
-		UICorner_4.Parent = Section
-	end
-	
-	local TweenService = game:GetService("TweenService")
-
-	function lib:NewButton(title, TabParent, toolTipText, callback)
+	function lib:NewButton(title, TabParent, callback)
 		local Button = Instance.new("ImageButton")
 		local UICorner_20 = Instance.new("UICorner")
 		local Title_8 = Instance.new("TextLabel")
 		local MouseIcon = Instance.new("ImageLabel")
 		local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
-		local ToolTip = Instance.new("Frame")
-		local UICorner_21 = Instance.new("UICorner")
-		local ToolTitle = Instance.new("TextLabel")
-		local UIStroke_2 = Instance.new("UIStroke")
 
 		Button.Name = "Button"
 		Button.Parent = TabParent
@@ -338,7 +307,7 @@ function lib:NewWindow(title)
 		Title_8.Font = Enum.Font.Gotham
 		Title_8.Text = title
 		Title_8.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_8.TextSize = 15.000
+		Title_8.TextSize = 18.000
 		Title_8.TextXAlignment = Enum.TextXAlignment.Left
 
 		MouseIcon.Name = "MouseIcon"
@@ -353,49 +322,6 @@ function lib:NewWindow(title)
 
 		UIAspectRatioConstraint_3.Parent = MouseIcon
 
-		ToolTip.Name = "ToolTip"
-		ToolTip.Parent = TabParent
-		ToolTip.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderSizePixel = 0
-		ToolTip.BackgroundTransparency = 0.3
-		ToolTip.Position = UDim2.new(0.00833333377, 0, -0.0893554688, 0)
-		ToolTip.Size = UDim2.new(0, 420, 0, 34)
-		ToolTip.Visible = false
-
-		UICorner_21.CornerRadius = UDim.new(0, 4)
-		UICorner_21.Parent = ToolTip
-
-		ToolTitle.Name = "ToolTitle"
-		ToolTitle.Parent = ToolTip
-		ToolTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.BackgroundTransparency = 1.000
-		ToolTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTitle.BorderSizePixel = 0
-		ToolTitle.Position = UDim2.new(0.0423728824, 0, -0.028801702, 0)
-		ToolTitle.Size = UDim2.new(0, 226, 0, 34)
-		ToolTitle.Font = Enum.Font.SourceSans
-		ToolTitle.Text = toolTipText
-		ToolTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.TextSize = 18.000
-		ToolTitle.TextXAlignment = Enum.TextXAlignment.Left
-
-		local tooltipTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-		local tooltipVisibleTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 34), Transparency = 0.5})
-		local tooltipHiddenTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 0), Transparency = 1})
-
-		Button.MouseEnter:Connect(function()
-			ToolTip.Visible = true
-			tooltipVisibleTween:Play()
-		end)
-
-		Button.MouseLeave:Connect(function()
-			tooltipHiddenTween:Play()
-			tooltipHiddenTween.Completed:Connect(function()
-				ToolTip.Visible = false
-			end)
-		end)
-
 		Button.MouseButton1Click:Connect(function()
 			if callback then
 				callback()
@@ -404,151 +330,134 @@ function lib:NewWindow(title)
 
 		return Button
 	end
-
+	
 	local TweenService = game:GetService("TweenService")
 	local UserInputService = game:GetService("UserInputService")
-	
-	function lib:NewToggle(title, tabParent, toolTipText, callback)
-	    local Toggle = Instance.new("ImageButton")
-	    local UICorner_8 = Instance.new("UICorner")
-	    local Title_3 = Instance.new("TextLabel")
-	    local Checkbox_2 = Instance.new("Frame")
-	    local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
-	    local UICorner_9 = Instance.new("UICorner")
-	    local Checkmark_2 = Instance.new("ImageLabel")
-	    local UICorner_10 = Instance.new("UICorner")
-	    local KeybindToggleBox_2 = Instance.new("TextBox")
-	    local ToolTip = Instance.new("Frame")
-	    local UICorner_21 = Instance.new("UICorner")
-	    local ToolTitle = Instance.new("TextLabel")
-	    local UIStroke_2 = Instance.new("UIStroke")
-	
-	    Toggle.Name = "Toggle"
-	    Toggle.Parent = tabParent
-	    Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	    Toggle.BackgroundTransparency = 0.5
-	    Toggle.BorderSizePixel = 0
-	    Toggle.Size = UDim2.new(0, 472, 0, 38)
-	    Toggle.AutoButtonColor = false
-	    UICorner_8.CornerRadius = UDim.new(0, 6)
-	    UICorner_8.Parent = Toggle
-	
-	    Title_3.Name = "Title"
-	    Title_3.Parent = Toggle
-	    Title_3.BackgroundTransparency = 1
-	    Title_3.Position = UDim2.new(0.025, 0, 0, 0)
-	    Title_3.Size = UDim2.new(0, 234, 0, 38)
-	    Title_3.Font = Enum.Font.Gotham
-	    Title_3.Text = title
-	    Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-	    Title_3.TextSize = 15
-	    Title_3.TextXAlignment = Enum.TextXAlignment.Left
-	
-	    Checkbox_2.Name = "Checkbox"
-	    Checkbox_2.Parent = Toggle
-	    Checkbox_2.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-	    Checkbox_2.Position = UDim2.new(0.918, 0, 0.122, 0)
-	    Checkbox_2.Size = UDim2.new(0, 32, 0, 29)
-	    UICorner_9.CornerRadius = UDim.new(0, 4)
-	    UICorner_9.Parent = Checkbox_2
-	    UIAspectRatioConstraint_2.Parent = Checkbox_2
-	    UIAspectRatioConstraint_2.AspectRatio = 1.13
-	
-	    Checkmark_2.Name = "Checkmark"
-	    Checkmark_2.Parent = Checkbox_2
-	    Checkmark_2.BackgroundTransparency = 1
-	    Checkmark_2.Size = UDim2.new(0, 25, 0, 22)
-	    Checkmark_2.Image = "rbxassetid://10709790644"
-	    Checkmark_2.ImageTransparency = 1
-	    Checkmark_2.Position = UDim2.new(0.09375, 0, 0.118791193, 0)
-	
-	    KeybindToggleBox_2.Name = "KeybindToggleBox"
-	    KeybindToggleBox_2.Parent = Toggle
-	    KeybindToggleBox_2.BackgroundTransparency = 1
-	    KeybindToggleBox_2.Position = UDim2.new(0.739, 0, 0, 0)
-	    KeybindToggleBox_2.Size = UDim2.new(0, 78, 0, 38)
-	    KeybindToggleBox_2.Font = Enum.Font.SourceSans
-	    KeybindToggleBox_2.PlaceholderText = "Click To Bind"
-	    KeybindToggleBox_2.Text = ""
-	    KeybindToggleBox_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-	    KeybindToggleBox_2.TextSize = 17
-	    KeybindToggleBox_2.TextXAlignment = Enum.TextXAlignment.Left
-	
-	    ToolTip.Name = "Tooltip"
-	    ToolTip.Parent = tabParent
-	    ToolTip.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	    ToolTip.BackgroundTransparency = 0.3
-	    ToolTip.Position = UDim2.new(0.008, 0, -0.089, 0)
-	    ToolTip.Size = UDim2.new(0, 420, 0, 34)
-	    ToolTip.Visible = false
-	    UICorner_21.CornerRadius = UDim.new(0, 4)
-	    UICorner_21.Parent = ToolTip
-	
-	    ToolTitle.Name = "ToolTitle"
-	    ToolTitle.Parent = ToolTip
-	    ToolTitle.BackgroundTransparency = 1
-	    ToolTitle.Position = UDim2.new(0.042, 0, 0, 0)
-	    ToolTitle.Size = UDim2.new(0, 226, 0, 34)
-	    ToolTitle.Font = Enum.Font.SourceSans
-	    ToolTitle.Text = toolTipText
-	    ToolTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	    ToolTitle.TextSize = 18
-	
-	    local tooltipTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-		local tooltipVisibleTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 34), Transparency = 0.5})
-		local tooltipHiddenTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 0), Transparency = 1})
-	
-	    Toggle.MouseEnter:Connect(function()
-			ToolTip.Visible = true
-			tooltipVisibleTween:Play()
+
+	function lib:NewToggle(title, TabParent, callback)
+		local Toggle = Instance.new("ImageButton")
+		local UICorner_8 = Instance.new("UICorner")
+		local Title_3 = Instance.new("TextLabel")
+		local Checkbox_2 = Instance.new("Frame")
+		local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+		local UICorner_9 = Instance.new("UICorner")
+		local Checkmark_2 = Instance.new("ImageLabel")
+		local UICorner_10 = Instance.new("UICorner")
+		local KeybindToggleBox_2 = Instance.new("TextBox")
+
+		Toggle.Name = "Toggle"
+		Toggle.Parent = TabParent
+		Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		Toggle.BackgroundTransparency = 0.5
+		Toggle.BorderSizePixel = 0
+		Toggle.Size = UDim2.new(0, 472, 0, 38)
+		Toggle.AutoButtonColor = false
+
+		UICorner_8.CornerRadius = UDim.new(0, 6)
+		UICorner_8.Parent = Toggle
+
+		Title_3.Name = "Title"
+		Title_3.Parent = Toggle
+		Title_3.BackgroundTransparency = 1
+		Title_3.Position = UDim2.new(0.025, 0, 0, 0)
+		Title_3.Size = UDim2.new(0, 234, 0, 38)
+		Title_3.Font = Enum.Font.Gotham
+		Title_3.Text = title
+		Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Title_3.TextSize = 18
+		Title_3.TextXAlignment = Enum.TextXAlignment.Left
+
+		Checkbox_2.Name = "Checkbox"
+		Checkbox_2.Parent = Toggle
+		Checkbox_2.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		Checkbox_2.Position = UDim2.new(0.918, 0, 0.122, 0)
+		Checkbox_2.Size = UDim2.new(0, 32, 0, 29)
+
+		UIAspectRatioConstraint_2.Parent = Checkbox_2
+		UIAspectRatioConstraint_2.AspectRatio = 1.13
+
+		UICorner_9.CornerRadius = UDim.new(0, 4)
+		UICorner_9.Parent = Checkbox_2
+
+		Checkmark_2.Name = "Checkmark"
+		Checkmark_2.Parent = Checkbox_2
+		Checkmark_2.BackgroundTransparency = 1
+		Checkmark_2.Size = UDim2.new(0, 25, 0, 22)
+		Checkmark_2.Image = "rbxassetid://10709790644"
+		Checkmark_2.ImageTransparency = 1
+		Checkmark_2.Position = UDim2.new(0.09375, 0, 0.118791193, 0)
+
+		UICorner_10.CornerRadius = UDim.new(0, 4)
+		UICorner_10.Parent = Checkmark_2
+
+		KeybindToggleBox_2.Name = "KeybindToggleBox"
+		KeybindToggleBox_2.Parent = Toggle
+		KeybindToggleBox_2.BackgroundTransparency = 1
+		KeybindToggleBox_2.Position = UDim2.new(0.739, 0, 0, 0)
+		KeybindToggleBox_2.Size = UDim2.new(0, 78, 0, 38)
+		KeybindToggleBox_2.Font = Enum.Font.SourceSans
+		KeybindToggleBox_2.PlaceholderText = "Click To Bind"
+		KeybindToggleBox_2.Text = ""
+		KeybindToggleBox_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+		KeybindToggleBox_2.TextSize = 17
+		KeybindToggleBox_2.TextXAlignment = Enum.TextXAlignment.Left
+
+		Toggle.MouseButton1Click:Connect(function()
+			if callback then
+				callback()
+			end
 		end)
 
-		Toggle.MouseLeave:Connect(function()
-			tooltipHiddenTween:Play()
-			tooltipHiddenTween.Completed:Connect(function()
-				ToolTip.Visible = false
-			end)
+		local toggleState = false
+		local boundKey = nil
+
+		local function updateToggle(state)
+			local newTransparency = state and 0 or 1
+			local tween = TweenService:Create(Checkmark_2, TweenInfo.new(0.2), {ImageTransparency = newTransparency})
+			tween:Play()
+			if callback then
+				callback(state)
+			end
+		end
+
+		Toggle.MouseButton1Click:Connect(function()
+			toggleState = not toggleState
+			updateToggle(toggleState)
 		end)
-	
-	    local toggleState = false
-	    local boundKey
-	
-	    local function updateToggle(state)
-	        local targetTransparency = state and 0 or 1
-	        TweenService:Create(Checkmark_2, TweenInfo.new(0.2), {ImageTransparency = targetTransparency}):Play()
-	        if callback then
-	            callback(state)
-	        end
-	    end
-	
-	    Toggle.MouseButton1Click:Connect(function()
-	        toggleState = not toggleState
-	        updateToggle(toggleState)
-	    end)
-	
-	    KeybindToggleBox_2.FocusLost:Connect(function(enterPressed)
-	        if enterPressed then
-	            local inputText = KeybindToggleBox_2.Text:upper()
-	            if #inputText == 1 and inputText:match("%a") then
-	                boundKey = inputText
-	                KeybindToggleBox_2.Text = "Bind: " .. boundKey
-	            else
-	                KeybindToggleBox_2.Text = ""
-	            end
-	        end
-	    end)
-	
-	    UserInputService.InputBegan:Connect(function(input, isProcessed)
-	        if not isProcessed and input.KeyCode.Name == boundKey then
-	            toggleState = not toggleState
-	            updateToggle(toggleState)
-	        end
-	    end)
-	end
+
+		local function updateToggle(state)
+			local newTransparency = state and 0 or 1
+			local tween = TweenService:Create(Checkmark_2, TweenInfo.new(0.25), {ImageTransparency = newTransparency})
+			tween:Play()
+			if callback then
+				callback(state)
+			end
+		end
+
+		KeybindToggleBox_2.FocusLost:Connect(function(enterPressed)
+			if enterPressed then
+				local text = KeybindToggleBox_2.Text:upper():gsub("%s+", "")
+				if #text == 1 and text:match("[%a%d]") then
+					boundKey = text
+					KeybindToggleBox_2.Text = "Bind: " .. boundKey
+				else
+					KeybindToggleBox_2.Text = ""
+					KeybindToggleBox_2.PlaceholderText = "Invalid Key!"
+				end
+			end
+		end)
+
+		UserInputService.InputBegan:Connect(function(input, isProcessed)
+			if not isProcessed and boundKey and input.KeyCode.Name == boundKey then
+				toggleState = not toggleState
+				updateToggle(toggleState)
+			end
+		end)
+	end	
 	
 	local UserInputService = game:GetService("UserInputService")
 
-	function lib:NewSlider(title, TabParent, min, max, default, toolTipText, callback)
+	function lib:NewSlider(title, TabParent, min, max, default, callback)
 		local Slider = Instance.new("ImageButton")
 		local UICorner_11 = Instance.new("UICorner")
 		local Title_4 = Instance.new("TextLabel")
@@ -557,10 +466,6 @@ function lib:NewWindow(title)
 		local Draggable = Instance.new("Frame")
 		local UICorner_13 = Instance.new("UICorner")
 		local Value = Instance.new("TextLabel")
-		local ToolTip = Instance.new("Frame")
-		local UICorner_21 = Instance.new("UICorner")
-		local ToolTitle = Instance.new("TextLabel")
-		local UIStroke_2 = Instance.new("UIStroke")
 
 		Slider.Name = "Slider"
 		Slider.Parent = TabParent
@@ -586,7 +491,7 @@ function lib:NewWindow(title)
 		Title_4.Font = Enum.Font.Gotham
 		Title_4.Text = title
 		Title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_4.TextSize = 15.000
+		Title_4.TextSize = 18.000
 		Title_4.TextXAlignment = Enum.TextXAlignment.Left
 
 		SliderBack.Name = "SliderBack"
@@ -622,51 +527,8 @@ function lib:NewWindow(title)
 		Value.Font = Enum.Font.Gotham
 		Value.Text = tostring(default)
 		Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Value.TextSize = 15.000
+		Value.TextSize = 18.000
 		Value.TextXAlignment = Enum.TextXAlignment.Right
-		
-		ToolTip.Name = "Tooptip"
-		ToolTip.Parent = TabParent
-		ToolTip.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderSizePixel = 0
-		ToolTip.BackgroundTransparency = 0.3
-		ToolTip.Position = UDim2.new(0.00833333377, 0, -0.0893554688, 0)
-		ToolTip.Size = UDim2.new(0, 420, 0, 34)
-		ToolTip.Visible = false
-
-		UICorner_21.CornerRadius = UDim.new(0, 4)
-		UICorner_21.Parent = ToolTip
-
-		ToolTitle.Name = "ToolTitle"
-		ToolTitle.Parent = ToolTip
-		ToolTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.BackgroundTransparency = 1.000
-		ToolTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTitle.BorderSizePixel = 0
-		ToolTitle.Position = UDim2.new(0.0423728824, 0, -0.028801702, 0)
-		ToolTitle.Size = UDim2.new(0, 226, 0, 34)
-		ToolTitle.Font = Enum.Font.SourceSans
-		ToolTitle.Text = toolTipText
-		ToolTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.TextSize = 18.000
-		ToolTitle.TextXAlignment = Enum.TextXAlignment.Left
-
-		local tooltipTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-		local tooltipVisibleTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 34), Transparency = 0.5})
-		local tooltipHiddenTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 0), Transparency = 1})
-
-		Slider.MouseEnter:Connect(function()
-			ToolTip.Visible = true
-			tooltipVisibleTween:Play()
-		end)
-
-		Slider.MouseLeave:Connect(function()
-			tooltipHiddenTween:Play()
-			tooltipHiddenTween.Completed:Connect(function()
-				ToolTip.Visible = false
-			end)
-		end)
 
 		Slider.MouseButton1Click:Connect(function()
 			if callback then
@@ -725,17 +587,13 @@ function lib:NewWindow(title)
 		UpdateSliderPosition()
 	end
 	
-	function lib:NewDropdown(title, TabParent, options, toolTipText, callback)
+	function lib:NewDropdown(title, TabParent, options, callback)
 		local Dropdown = Instance.new("ImageButton")
 		local UICorner_14 = Instance.new("UICorner")
 		local Title_5 = Instance.new("TextLabel")
 		local Checkbox_3 = Instance.new("Frame")
 		local UICorner_15 = Instance.new("UICorner")
 		local SelectedText = Instance.new("TextLabel")
-		local ToolTip = Instance.new("Frame")
-		local UICorner_21 = Instance.new("UICorner")
-		local ToolTitle = Instance.new("TextLabel")
-		local UIStroke_2 = Instance.new("UIStroke")
 
 		Dropdown.Name = "Dropdown"
 		Dropdown.Parent = TabParent
@@ -761,7 +619,7 @@ function lib:NewWindow(title)
 		Title_5.Font = Enum.Font.Gotham
 		Title_5.Text = title
 		Title_5.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_5.TextSize = 15.000
+		Title_5.TextSize = 18.000
 		Title_5.TextXAlignment = Enum.TextXAlignment.Left
 
 		Checkbox_3.Name = "Checkbox"
@@ -785,7 +643,7 @@ function lib:NewWindow(title)
 		SelectedText.Font = Enum.Font.Gotham
 		SelectedText.Text = "Select an option"
 		SelectedText.TextColor3 = Color3.fromRGB(255, 255, 255)
-		SelectedText.TextSize = 15.000
+		SelectedText.TextSize = 18.000
 
 		local DropHolder = Instance.new("Frame")
 		local UIPadding_4 = Instance.new("UIPadding")
@@ -806,50 +664,7 @@ function lib:NewWindow(title)
 		UIListLayout_4.Parent = DropHolder
 		UIListLayout_4.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_4.Padding = UDim.new(0, 0)
-		
-		ToolTip.Name = "Tooptip"
-		ToolTip.Parent = TabParent
-		ToolTip.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTip.BorderSizePixel = 0
-		ToolTip.BackgroundTransparency = 0.3
-		ToolTip.Position = UDim2.new(0.00833333377, 0, -0.0893554688, 0)
-		ToolTip.Size = UDim2.new(0, 420, 0, 34)
-		ToolTip.Visible = false
-
-		UICorner_21.CornerRadius = UDim.new(0, 4)
-		UICorner_21.Parent = ToolTip
-
-		ToolTitle.Name = "ToolTitle"
-		ToolTitle.Parent = ToolTip
-		ToolTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.BackgroundTransparency = 1.000
-		ToolTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ToolTitle.BorderSizePixel = 0
-		ToolTitle.Position = UDim2.new(0.0423728824, 0, -0.028801702, 0)
-		ToolTitle.Size = UDim2.new(0, 226, 0, 34)
-		ToolTitle.Font = Enum.Font.SourceSans
-		ToolTitle.Text = toolTipText
-		ToolTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-		ToolTitle.TextSize = 18.000
-		ToolTitle.TextXAlignment = Enum.TextXAlignment.Left
-
-		local tooltipTweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-		local tooltipVisibleTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 34), Transparency = 0.5})
-		local tooltipHiddenTween = TweenService:Create(ToolTip, tooltipTweenInfo, {Size = UDim2.new(0, 420, 0, 0), Transparency = 1})
-
-		Dropdown.MouseEnter:Connect(function()
-			ToolTip.Visible = true
-			tooltipVisibleTween:Play()
-		end)
-
-		Dropdown.MouseLeave:Connect(function()
-			tooltipHiddenTween:Play()
-			tooltipHiddenTween.Completed:Connect(function()
-				ToolTip.Visible = false
-			end)
-		end)
+		UIListLayout_4.Padding = UDim.new(0, 1)
 
 		Dropdown.MouseButton1Click:Connect(function()
 			if callback then
@@ -926,7 +741,7 @@ function lib:NewWindow(title)
 		Title_6.Font = Enum.Font.Gotham
 		Title_6.Text = title
 		Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_6.TextSize = 15.000
+		Title_6.TextSize = 18.000
 		Title_6.TextXAlignment = Enum.TextXAlignment.Left
 
 		Checkbox_4.Name = "Checkbox"
@@ -959,7 +774,7 @@ function lib:NewWindow(title)
 			end
 		end)
 	end
-	
+
 	return lib
 end
 ```
